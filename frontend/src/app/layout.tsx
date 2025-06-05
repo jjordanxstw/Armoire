@@ -1,12 +1,12 @@
 
-import Footer from '@/components/Footer';
+import Footer from '@/components/footer/Footer';
 import '../styles/globals.css'
 
-import TopNavbar from '@/components/TopNavBar'
-import { notoSans, roboto } from '@/styles/fonts';
+import TopNavbar from '@/components/navbar/TopNavBar'
+import { notoSans } from '@/styles/fonts';
 
 export const metadata = {
-  title: 'Closify - Effortless Outfit Management',
+  title: 'Armoire',
   description: 'Manage and mix your clothes effortlessly.',
 }
 

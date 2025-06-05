@@ -1,4 +1,4 @@
-import { Noto_Sans, Noto_Serif_Display, Roboto } from "next/font/google";
+import { Noto_Sans,Jost } from "next/font/google";
 
 export const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -6,15 +6,9 @@ export const notoSans = Noto_Sans({
   display: 'swap',
 });
 
-export const notoSerifDisplay = Noto_Serif_Display({
+export const jost = Jost({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],      
-  display: 'swap',
-});
-
-export const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-roboto',
   fallback: ['system-ui', 'sans-serif'],

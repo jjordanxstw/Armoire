@@ -1,6 +1,6 @@
 'use client'
 
-import { appDescriptions, appFeatures } from "@/styles/words"
+import { appDescriptions, appFeatures } from "@/constants/words"
 import { useEffect } from "react"
 
 export default function HomePage() {
