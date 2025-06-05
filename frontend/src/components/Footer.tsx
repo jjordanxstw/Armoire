@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Icons from "./Icons";
-import { Input } from "./ui/input";
+import { InputWithButton } from "./Input";
 
 export default function Footer() {
   return (
-    <footer className={'bg-black text-white px-6 pt-10 pb-20 mt-10'}>
-        <div className="max-w-7xl mx-auto space-y-10">
+    <footer className={'bg-black text-white px-6 pt-10 mt-10 pb-6'}>
+        <div className="max-w-7xl mx-auto">
 
             {/* LOGO */}
-            <div className="w-full flex flex-col">
+            <div className="w-full flex flex-col mb-6">
                 <Image src='/OutzyLogoWhite.png' alt="logo" width={150} height={0} />
             </div>
 
@@ -18,7 +18,6 @@ export default function Footer() {
                 <div className="flex-1" >
                     <h3 className="font-semibold mb-3">Contact us</h3>
                     <Icons/>
-                    <p className="text-xs text-gray-500">&copy; 2025 Outzy. All rights reserved.</p>
                 </div>
 
                 {/* ABOUT */}
@@ -48,14 +47,12 @@ export default function Footer() {
                         Subscribe to get the latest trends and outfit tips.
                     </p>
                     <div className="flex">
-                        <Input
-                            type="email"
-                            placeholder="Your email"
-                            className="w-full px-3 py-2 rounded-l bg-gray-800 text-white border border-gray-700 text-sm"
-                        />
+                        <InputWithButton/>
                     </div>
                 </div>
             </div>
+            <hr className="border-t border-gray-300 mt-10 mb-4" />
+            <p className="text-xs text-gray-500">Copyright &copy; 2025 Outzy. All rights reserved.</p>
         </div>
     </footer>
   );

@@ -5,9 +5,10 @@ export function InputWithButton() {
   return (
     <div className="flex w-full max-w-sm items-center gap-2">
       <Input type="email" placeholder="Email" />
-      <Button type="submit" variant="outline">
+      <Button type="submit" variant="outline" className="text-black">
         Subscribe
       </Button>
     </div>
   )
 }
+export default InputWithButton;
