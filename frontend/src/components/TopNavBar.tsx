@@ -29,7 +29,7 @@ export default function TopNavbar({defaultBgColor = 'bg-transparent',scrolledBgC
     >
         <div className="max-w-5xl mx-auto flex justify-between items-center">
             <div className="flex justify-end items-center bg-color-grey-100 space-x-12">
-                <Image src="/OutzyLogo.png" alt="logo" width={120} height={0} />
+                <Image src="/ClosifyLogoBlack.png" alt="logo" width={120} height={0} />
                 <a href="#about" className="hover:underline">About us</a>
                 <a href="#features" className="hover:underline">How it works</a>
                 <a href="#contact" className="hover:underline">FAQ</a>

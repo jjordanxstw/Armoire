@@ -11,7 +11,7 @@ export default function Footer() {
 
             {/* LOGO */}
             <div className="w-full flex flex-col mb-6">
-                <Image src='/OutzyLogoWhite.png' alt="logo" width={150} height={0} />
+                <Image src='/CLosifyLogo.png' alt="logo" width={150} height={0} />
             </div>
 
             <div className="flex flex-col md:flex-row gap-8">
@@ -24,7 +24,7 @@ export default function Footer() {
 
                 {/* ABOUT */}
                 <div className="w-32">
-                    <h3 className="font-semibold mb-3">What's Outzy</h3>
+                    <h3 className="font-semibold mb-3">What's CLOSIFY</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
                     <li><a href="/about" className="hover:underline">Our Story</a></li>
                     <li><a href="/team" className="hover:underline">Team</a></li>
@@ -55,7 +55,7 @@ export default function Footer() {
             </div>
             <hr className="border-t border-gray-300 mt-10 mb-4" />
             <div className="flex justify-first items-center text-sm space-x-2">
-                <p className="text-xs text-gray-500">Copyright &copy; 2025 Outzy Inc. All rights reserved.</p>
+                <p className="text-xs text-gray-500">Copyright &copy; 2025 Closify Inc. All rights reserved.</p>
                 <Separator className="h-3" orientation="vertical" />
                 <a href="/policy" className="text-xs">Privacy Policy</a>
                 <Separator className="h-3" orientation="vertical" />

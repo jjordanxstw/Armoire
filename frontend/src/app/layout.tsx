@@ -6,7 +6,7 @@ import TopNavbar from '@/components/TopNavBar'
 import { notoSans, roboto } from '@/styles/fonts';
 
 export const metadata = {
-  title: 'Outzy',
+  title: 'Closify - Effortless Outfit Management',
   description: 'Manage and mix your clothes effortlessly.',
 }
 
