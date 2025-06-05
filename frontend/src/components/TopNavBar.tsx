@@ -1,5 +1,6 @@
 'use client'
 
+import { roboto } from '@/styles/fonts';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -22,12 +23,18 @@ export default function TopNavbar({defaultBgColor = 'bg-transparent',scrolledBgC
 
     return (
     <nav
-      className={`w-full px-6 py-4 fixed top-0 z-50 transition-all duration-300
+      className={`w-full px-6 py-4 fixed top-0 z-50 transition-all duration-300 ${roboto.className}
         ${isScrolled ? `${scrolledBgColor}` : `${defaultBgColor}`}
       `}
     >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <Image src="/OutzyLogo.png" alt="logo" width={170} height={0} />
+        <div className="max-w-5xl mx-auto flex justify-between items-center">
+            <div className="flex justify-end items-center bg-color-grey-100 space-x-12">
+                <Image src="/OutzyLogo.png" alt="logo" width={120} height={0} />
+                <a href="#about" className="hover:underline">About us</a>
+                <a href="#features" className="hover:underline">How it works</a>
+                <a href="#contact" className="hover:underline">FAQ</a>
+                <a href="#support" className="hover:underline">Support</a>
+            </div>
             <div className="space-x-4">
                 <a href="#about" className="hover:underline">About</a>
                 <a href="#features" className="hover:underline">Features</a>

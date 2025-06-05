@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Icons from "./Icons";
 import { InputWithButton } from "./Input";
+import { roboto } from "@/styles/fonts";
+import { Separator } from "./ui/separator";
 
 export default function Footer() {
   return (
-    <footer className={'bg-black text-white px-6 pt-10 mt-10 pb-6'}>
-        <div className="max-w-7xl mx-auto">
+    <footer className={'bg-black text-white px-6 pt-10 pb-6 '+`${roboto.className}`}>
+        <div className="max-w-5xl mx-auto">
 
             {/* LOGO */}
             <div className="w-full flex flex-col mb-6">
@@ -22,11 +24,12 @@ export default function Footer() {
 
                 {/* ABOUT */}
                 <div className="w-32">
-                    <h3 className="font-semibold mb-3">About</h3>
+                    <h3 className="font-semibold mb-3">What's Outzy</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
                     <li><a href="/about" className="hover:underline">Our Story</a></li>
                     <li><a href="/team" className="hover:underline">Team</a></li>
-                    <li><a href="/careers" className="hover:underline">Careers</a></li>
+                    <li><a href="/careers" className="hover:underline">Contact us</a></li>
+                    <li><a href="/careers" className="hover:underline">About us</a></li>
                     </ul>
                 </div>
 
@@ -34,9 +37,8 @@ export default function Footer() {
                 <div className="w-32">
                     <h3 className="font-semibold mb-3">Support</h3>
                     <ul className="space-y-2 text-sm text-gray-300">
-                    <li><a href="/contact" className="hover:underline">Contact</a></li>
                     <li><a href="/faq" className="hover:underline">FAQ</a></li>
-                    <li><a href="/privacy" className="hover:underline">Privacy</a></li>
+                    <li><a href="/ourOpinion" className="hover:underline">Our Opinions</a></li>
                     </ul>
                 </div>
 
@@ -52,7 +54,13 @@ export default function Footer() {
                 </div>
             </div>
             <hr className="border-t border-gray-300 mt-10 mb-4" />
-            <p className="text-xs text-gray-500">Copyright &copy; 2025 Outzy. All rights reserved.</p>
+            <div className="flex justify-first items-center text-sm space-x-2">
+                <p className="text-xs text-gray-500">Copyright &copy; 2025 Outzy Inc. All rights reserved.</p>
+                <Separator className="h-3" orientation="vertical" />
+                <a href="/policy" className="text-xs">Privacy Policy</a>
+                <Separator className="h-3" orientation="vertical" />
+                <a href="/term" className="text-xs">Terms of service</a>
+            </div>
         </div>
     </footer>
   );

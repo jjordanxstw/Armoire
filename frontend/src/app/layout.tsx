@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import '../styles/globals.css'
 
 import TopNavbar from '@/components/TopNavBar'
-import { exo2, josefinSans } from '@/styles/fonts';
+import { notoSans, roboto } from '@/styles/fonts';
 
 export const metadata = {
   title: 'Outzy',
@@ -13,10 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${josefinSans.className}`}>
+      <body className='text-sm'>
         <TopNavbar defaultBgColor='bg-transparent' scrolledBgColor='bg-white backdrop-blur-md' />
-        <main className="px-6 py-4">{children}</main>
-        <Footer/>
+        <div className='min-w-[1024px] flex flex-col min-h-screen'>
+          <main className={`${notoSans.className}`}>{children}</main>
+          <Footer/>
+        </div>
       </body>
     </html>
   );
