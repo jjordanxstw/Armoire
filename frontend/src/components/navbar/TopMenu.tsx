@@ -21,8 +21,8 @@ export default function TopMenu() {
                                 key={item.href}
                                 href={item.href}
                                 className={`transition-all font-medium duration-200 ${isActive
-                                        ? 'underline underline-offset-4'
-                                        : 'text-black hover:opacity-80'
+                                    ? 'underline underline-offset-4'
+                                    : 'text-black hover:opacity-80'
                                     }`}
                             >
                                 {item.label}
