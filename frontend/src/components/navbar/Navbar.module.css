@@ -1,0 +1,15 @@
+.link {
+	@apply transition-all duration-200 font-medium;
+}
+
+.link-hover {
+	@apply underline underline-offset-4;
+}
+
+.link-unhover {
+	@apply text-black hover:opacity-80;
+}
+
+.nav {
+	@apply w-full px-6 py-2 fixed top-0 z-50 transition-all duration-300;
+}

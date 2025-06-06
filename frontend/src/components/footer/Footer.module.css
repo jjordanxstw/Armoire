@@ -1,57 +1,39 @@
 .footer {
-	background-color: black;
-	color: white;
-	padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+	@apply bg-black text-white pt-10 px-6 pb-6;
 }
 
 .container {
-	max-width: 64rem;
-	margin-left: auto;
-	margin-right: auto;
+	@apply max-w-5xl mx-auto;
 }
 
 .logo {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 1.5rem;
+	@apply w-full flex flex-col mb-6;
 }
 
 .icon {
-	width: 28px;
-	height: 28px;
+	@apply w-7 h-7;
 }
 
 .heading {
-	font-weight: 600;
-	margin-bottom: 1rem;
+	@apply font-semibold mb-4;
 }
 
 .list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	font-size: 0.875rem;
-	color: #d1d5db;
+	@apply flex flex-col gap-2 text-sm text-gray-300;
 }
 
 .description {
-	font-size: 0.875rem;
-	color: #9ca3af;
-	margin-bottom: 0.75rem;
+	@apply text-sm text-gray-400 mb-3;
 }
 
 .copyrightContainer {
-	display: flex;
-	align-items: center;
-	font-size: 0.875rem;
-	gap: 0.5rem;
+	@apply flex items-center text-sm gap-2;
 }
 
 .link {
-	font-size: 0.75rem;
+	@apply text-xs;
 }
 
 .link:hover {
-	text-decoration: underline;
+	@apply underline;
 }

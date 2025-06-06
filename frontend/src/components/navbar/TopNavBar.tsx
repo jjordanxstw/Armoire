@@ -1,37 +1,40 @@
-'use client'
+"use client";
 
-import { jost } from '@/styles/fonts';
-import React, { useEffect, useState } from 'react';
-import TopMenu from './TopMenu';
-import TopRightMenu from './TopRightMenu';
+import { jost } from "@/styles/fonts";
+import React, { useEffect, useState } from "react";
+import TopMenu from "./TopMenu";
+import TopRightMenu from "./TopRightMenu";
+import styles from "./Navbar.module.css";
 
 interface TopNavbarProps {
-    defaultBgColor?: string,
-    scrolledBgColor?: string,
+	defaultBgColor?: string;
+	scrolledBgColor?: string;
 }
 
-export default function TopNavbar({ defaultBgColor = 'bg-transparent', scrolledBgColor = 'bg-white' }: TopNavbarProps) {
+export default function TopNavbar({
+	defaultBgColor = "bg-transparent",
+	scrolledBgColor = "bg-white",
+}: TopNavbarProps) {
+	const [isScrolled, setIsScrolled] = useState(false);
 
-    const [isScrolled, setIsScrolled] = useState(false);
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 10);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, []);
-
-    return (
-        <nav
-            className={`w-full px-6 py-2 fixed top-0 z-50 transition-all duration-300 ${jost.className}
+	return (
+		<nav
+			className={`${styles.nav} ${jost.className}
         ${isScrolled ? `${scrolledBgColor}` : `${defaultBgColor}`}
-      `}
-        >
-            <div className="max-w-5xl mx-auto flex justify-between items-center">
-                <TopMenu />
-                <TopRightMenu />
-            </div>
-        </nav>
-    )
+        `}
+		>
+			<div className="max-w-5xl mx-auto flex justify-between items-center">
+				<TopMenu />
+				<TopRightMenu />
+			</div>
+		</nav>
+	);
 }
