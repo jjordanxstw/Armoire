@@ -1,6 +1,6 @@
 import { FaFacebook } from "react-icons/fa";
-import { FaSquareXTwitter, FaPinterest  } from "react-icons/fa6";
-import { AiFillTikTok, AiFillInstagram  } from "react-icons/ai";
+import { FaSquareXTwitter, FaPinterest } from "react-icons/fa6";
+import { AiFillTikTok, AiFillInstagram } from "react-icons/ai";
 import { facebookLink, instagramLink, tiktokLink, twitterLink } from "@/constants/links";
 
 export default function Icons() {

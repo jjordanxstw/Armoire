@@ -10,8 +10,8 @@ interface TopNavbarProps {
     scrolledBgColor?: string,
 }
 
-export default function TopNavbar({defaultBgColor = 'bg-transparent',scrolledBgColor = 'bg-white'}: TopNavbarProps) {
-    
+export default function TopNavbar({ defaultBgColor = 'bg-transparent', scrolledBgColor = 'bg-white' }: TopNavbarProps) {
+
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -20,18 +20,18 @@ export default function TopNavbar({defaultBgColor = 'bg-transparent',scrolledBgC
         };
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
-    },[]);
+    }, []);
 
     return (
-    <nav
-      className={`w-full px-6 py-2 fixed top-0 z-50 transition-all duration-300 ${jost.className}
+        <nav
+            className={`w-full px-6 py-2 fixed top-0 z-50 transition-all duration-300 ${jost.className}
         ${isScrolled ? `${scrolledBgColor}` : `${defaultBgColor}`}
       `}
-    >
-        <div className="max-w-5xl mx-auto flex justify-between items-center">
-            <TopMenu />
-            <TopRightMenu />
-        </div>
-    </nav>
-  )
+        >
+            <div className="max-w-5xl mx-auto flex justify-between items-center">
+                <TopMenu />
+                <TopRightMenu />
+            </div>
+        </nav>
+    )
 }
