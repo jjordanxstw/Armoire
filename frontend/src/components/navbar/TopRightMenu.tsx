@@ -1,11 +1,20 @@
 
+import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+
 export default function TopRightMenu() {
+
+  const router = useRouter();
+
   return (
     <>
         <div className="space-x-4">
-            <a href="/about" className="hover:underline">About</a>
-            <a href="/features" className="hover:underline">Features</a>
-            <a href="/contact" className="hover:underline">Contact</a>
+            <Button variant="ghost">Try Armoire</Button>
+            <Button 
+              onClick={() => router.push("/login")}
+              variant="outline">
+              Sign In
+            </Button>
         </div>
     </>
   );
