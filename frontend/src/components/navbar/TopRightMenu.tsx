@@ -8,9 +8,11 @@ export default function TopRightMenu() {
 
 	return (
 		<>
-			<div className="space-x-4">
-				<Button variant="ghost">Try Armoire</Button>
-				<Button onClick={() => router.push("/login")} variant="outline">
+			<div className="space-x-5">
+				<Button className="bg-black text-white" onClick={() => router.push("/login")} variant="ghost">
+					Try Armoire
+				</Button>
+				<Button className="bg-accent" onClick={() => router.push("/login")} variant="outline">
 					Sign In
 				</Button>
 			</div>

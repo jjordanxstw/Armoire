@@ -1,287 +1,170 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-	Eye,
-	EyeOff,
-	User,
-	Mail,
-	Lock,
-	ArrowRight,
-	Sparkles,
-	Github,
-	Chrome,
-} from "lucide-react";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { FaApple, FaFacebook } from "react-icons/fa";
+import Link from "next/link";
+import { Separator } from "./ui/separator";
+import styles from "./login.module.css";
 
-export default function AuthForms() {
-	const [isLogin, setIsLogin] = useState(true);
-	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-	const [formData, setFormData] = useState({
-		name: "",
+interface LoginForm {
+	email: string;
+	password: string;
+}
+
+interface RegisterForm extends LoginForm {
+	confirmPassword: string;
+}
+
+export default function AuthSwitcher() {
+	const [loginData, setLoginData] = useState<LoginForm>({
+		email: "",
+		password: "",
+	});
+	const [registerData, setRegisterData] = useState<RegisterForm>({
 		email: "",
 		password: "",
 		confirmPassword: "",
 	});
 
-	interface AuthFormData {
-		name: string;
-		email: string;
-		password: string;
-		confirmPassword: string;
-	}
-
-	interface InputChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
-
-	const handleInputChange = (e: InputChangeEvent) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value,
-		});
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement>,
+		formSetter: React.Dispatch<React.SetStateAction<any>>
+	) => {
+		const { name, value } = e.target;
+		formSetter((prev: any) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+	const handleLogin = (e: FormEvent) => {
 		e.preventDefault();
-		console.log("Form submitted:", formData);
+		console.log("Login: ", loginData);
+	};
+
+	const handleRegister = (e: FormEvent) => {
+		e.preventDefault();
+		console.log("Register: ", registerData);
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 relative overflow-hidden">
-			{/* Animated background elements */}
-			<div className="absolute inset-0 overflow-hidden">
-				<div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-				<div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-				<div className="absolute top-40 left-40 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
-			</div>
+		<div className="flex items-center justify-center px-4">
+			<div className="w-full max-w-md p-6 border rounded-xl shadow-md bg-white">
+				<h2 className="text-2xl font-semibold text-center">
+					Welcome back
+				</h2>
+				<p className="text-sm text-gray-500 text-center mt-2 mb-10">
+					Please enter your details to sign in
+				</p>
 
-			{/* Main container */}
-			<div className="relative z-10 w-full max-w-md">
-				{/* Form container */}
-				<div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20">
-					{/* Header */}
-					<div className="text-center mb-8">
-						<div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-4">
-							<Sparkles className="w-8 h-8 text-white" />
-						</div>
-						<h1 className="text-3xl font-bold text-white mb-2">
-							{isLogin ? "ยินดีต้อนรับกลับ" : "สร้างบัญชีใหม่"}
-						</h1>
-						<p className="text-gray-300">
-							{isLogin
-								? "เข้าสู่ระบบเพื่อดำเนินการต่อ"
-								: "เริ่มต้นการเดินทางของคุณ"}
-						</p>
-					</div>
+				<div className="flex gap-4 mt-6 mb-10 justify-center">
+					<Button
+						variant="outline"
+						className={styles.logo}
+					>
+						<FcGoogle className={styles.logoSize} />
+					</Button>
+					<Button
+						variant="outline"
+						className={styles.logo}
+					>
+						<FaApple className={styles.logoSize} />
+					</Button>
+					<Button
+						variant="outline"
+						className={styles.logo}
+					>
+						<FaFacebook className={styles.logoSize} style={{color:"#3B5998"}}/>
+					</Button>
+				</div>
 
-					{/* Toggle buttons */}
-					<div className="flex bg-white/10 rounded-2xl p-1 mb-8">
-						<button
-							onClick={() => setIsLogin(true)}
-							className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
-								isLogin
-									? "bg-white text-purple-900 shadow-lg"
-									: "text-white hover:bg-white/10"
-							}`}
-						>
-							เข้าสู่ระบบ
-						</button>
-						<button
-							onClick={() => setIsLogin(false)}
-							className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
-								!isLogin
-									? "bg-white text-purple-900 shadow-lg"
-									: "text-white hover:bg-white/10"
-							}`}
-						>
-							สมัครสมาชิก
-						</button>
-					</div>
+				<div className="flex items-center gap-4 w-full my-4">
+					<Separator className="flex-1" />
+					<span className="text-sm text-muted-foreground">or</span>
+					<Separator className="flex-1" />
+				</div>
 
-					{/* Form */}
-					<div className="space-y-6">
-						{/* Name field - only for register */}
-						{!isLogin && (
-							<div className="relative group">
-								<div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-									<User className="h-5 w-5 text-gray-400 group-focus-within:text-purple-300 transition-colors" />
-								</div>
-								<input
-									type="text"
-									name="name"
-									value={formData.name}
-									onChange={handleInputChange}
-									placeholder="ชื่อผู้ใช้"
-									className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-									required
-								/>
-							</div>
-						)}
+				<Tabs defaultValue="sign-in" className="w-full">
+					<TabsList className="grid w-full grid-cols-2">
+						<TabsTrigger value="sign-in">Sign in</TabsTrigger>
+						<TabsTrigger value="sign-up">Sign Up</TabsTrigger>
+					</TabsList>
 
-						{/* Email field */}
-						<div className="relative group">
-							<div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-								<Mail className="h-5 w-5 text-gray-400 group-focus-within:text-purple-300 transition-colors" />
-							</div>
-							<input
-								type="email"
+					<TabsContent value="sign-in">
+						<form onSubmit={handleLogin} className="space-y-4 mt-4">
+							<Input
 								name="email"
-								value={formData.email}
-								onChange={handleInputChange}
-								placeholder="อีเมล"
-								className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+								type="email"
+								placeholder="Email"
+								value={loginData.email}
+								onChange={(e) => handleChange(e, setLoginData)}
 								required
 							/>
-						</div>
-
-						{/* Password field */}
-						<div className="relative group">
-							<div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-								<Lock className="h-5 w-5 text-gray-400 group-focus-within:text-purple-300 transition-colors" />
-							</div>
-							<input
-								type={showPassword ? "text" : "password"}
+							<Input
 								name="password"
-								value={formData.password}
-								onChange={handleInputChange}
-								placeholder="รหัสผ่าน"
-								className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+								type="password"
+								placeholder="Password"
+								value={loginData.password}
+								onChange={(e) => handleChange(e, setLoginData)}
 								required
 							/>
-							<button
-								type="button"
-								onClick={() => setShowPassword(!showPassword)}
-								className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-purple-300 transition-colors"
-							>
-								{showPassword ? (
-									<EyeOff className="h-5 w-5" />
-								) : (
-									<Eye className="h-5 w-5" />
-								)}
-							</button>
-						</div>
-
-						{/* Confirm Password field - only for register */}
-						{!isLogin && (
-							<div className="relative group">
-								<div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-									<Lock className="h-5 w-5 text-gray-400 group-focus-within:text-purple-300 transition-colors" />
-								</div>
-								<input
-									type={
-										showConfirmPassword
-											? "text"
-											: "password"
-									}
-									name="confirmPassword"
-									value={formData.confirmPassword}
-									onChange={handleInputChange}
-									placeholder="ยืนยันรหัสผ่าน"
-									className="w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-									required
-								/>
-								<button
-									type="button"
-									onClick={() =>
-										setShowConfirmPassword(
-											!showConfirmPassword
-										)
-									}
-									className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-purple-300 transition-colors"
+							<Button type="submit" className="w-full">
+								Sign In
+							</Button>
+							<p className="text-center text-sm">
+								Forgot password?{" "}
+								<Link
+									href="/"
+									className="text-blue-600 underline"
 								>
-									{showConfirmPassword ? (
-										<EyeOff className="h-5 w-5" />
-									) : (
-										<Eye className="h-5 w-5" />
-									)}
-								</button>
-							</div>
-						)}
+									Reset
+								</Link>
+							</p>
+						</form>
+					</TabsContent>
 
-						{/* Forgot password - only for login */}
-						{isLogin && (
-							<div className="text-right">
-								<a
-									href="#"
-									className="text-purple-300 hover:text-white text-sm transition-colors"
-								>
-									ลืมรหัสผ่าน?
-								</a>
-							</div>
-						)}
-
-						{/* Submit button */}
-						<button
-							type="button"
-							onClick={handleSubmit}
-							className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center group"
+					<TabsContent value="sign-up">
+						<form
+							onSubmit={handleRegister}
+							className="space-y-4 mt-4"
 						>
-							{isLogin ? "เข้าสู่ระบบ" : "สร้างบัญชี"}
-							<ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-						</button>
-					</div>
-
-					{/* Divider */}
-					<div className="my-8 flex items-center">
-						<div className="flex-1 border-t border-white/20"></div>
-						<span className="px-4 text-gray-400 text-sm">หรือ</span>
-						<div className="flex-1 border-t border-white/20"></div>
-					</div>
-
-					{/* Social login */}
-					<div className="space-y-3">
-						<button className="w-full flex items-center justify-center px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105">
-							<Chrome className="w-5 h-5 mr-3" />
-							ดำเนินการต่อด้วย Google
-						</button>
-						<button className="w-full flex items-center justify-center px-4 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105">
-							<Github className="w-5 h-5 mr-3" />
-							ดำเนินการต่อด้วย GitHub
-						</button>
-					</div>
-
-					{/* Footer */}
-					<div className="mt-8 text-center text-gray-400 text-sm">
-						{isLogin ? (
-							<>
-								ยังไม่มีบัญชี?{" "}
-								<button
-									onClick={() => setIsLogin(false)}
-									className="text-purple-300 hover:text-white font-medium transition-colors"
-								>
-									สมัครสมาชิก
-								</button>
-							</>
-						) : (
-							<>
-								มีบัญชีแล้ว?{" "}
-								<button
-									onClick={() => setIsLogin(true)}
-									className="text-purple-300 hover:text-white font-medium transition-colors"
-								>
-									เข้าสู่ระบบ
-								</button>
-							</>
-						)}
-					</div>
-				</div>
-
-				{/* Terms and Privacy */}
-				<div className="mt-6 text-center text-xs text-gray-400">
-					การดำเนินการต่อถือว่าคุณยอมรับ{" "}
-					<a
-						href="#"
-						className="text-purple-300 hover:text-white transition-colors"
-					>
-						เงื่อนไขการใช้งาน
-					</a>{" "}
-					และ{" "}
-					<a
-						href="#"
-						className="text-purple-300 hover:text-white transition-colors"
-					>
-						นโยบายความเป็นส่วนตัว
-					</a>
-				</div>
+							<Input
+								name="email"
+								type="email"
+								placeholder="Email"
+								value={registerData.email}
+								onChange={(e) =>
+									handleChange(e, setRegisterData)
+								}
+								required
+							/>
+							<Input
+								name="password"
+								type="password"
+								placeholder="Password"
+								value={registerData.password}
+								onChange={(e) =>
+									handleChange(e, setRegisterData)
+								}
+								required
+							/>
+							<Input
+								name="confirmPassword"
+								type="password"
+								placeholder="Confirm Password"
+								value={registerData.confirmPassword}
+								onChange={(e) =>
+									handleChange(e, setRegisterData)
+								}
+								required
+							/>
+							<Button type="submit" className="w-full">
+								Create Account
+							</Button>
+						</form>
+					</TabsContent>
+				</Tabs>
 			</div>
 		</div>
 	);

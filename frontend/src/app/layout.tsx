@@ -26,7 +26,7 @@ export default function RootLayout({
 					defaultBgColor="bg-transparent"
 					scrolledBgColor="bg-white backdrop-blur-md"
 				/>
-				<div className="min-w-[1024px] flex flex-col min-h-screen">
+				<div className="flex flex-col min-h-screen">
 					<main className={`${notoSans.className}`}>{children}</main>
 					<Footer />
 				</div>

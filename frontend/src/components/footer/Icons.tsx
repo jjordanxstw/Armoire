@@ -11,7 +11,7 @@ import styles from "./Footer.module.css";
 
 export default function Icons() {
 	return (
-		<div className="flex space-x-4 mb-3">
+		<div className="flex space-x-6 mb-3">
 			<a href={facebookLink} target="_blank" rel="noopener noreferrer">
 				<FaFacebook className={styles.icon} />
 			</a>
