@@ -9,6 +9,8 @@ import { FaApple, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
 import { Separator } from "./ui/separator";
 import styles from "./login.module.css";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 interface LoginForm {
 	email: string;
@@ -20,6 +22,8 @@ interface RegisterForm extends LoginForm {
 }
 
 export default function AuthSwitcher() {
+	const [showPassword, setShowPassword] = useState(false);
+     const router = useRouter();
 	const [loginData, setLoginData] = useState<LoginForm>({
 		email: "",
 		password: "",
@@ -41,16 +45,20 @@ export default function AuthSwitcher() {
 	const handleLogin = (e: FormEvent) => {
 		e.preventDefault();
 		console.log("Login: ", loginData);
+          setLoginData({ email: "", password: "" });
+          router.refresh();
 	};
 
 	const handleRegister = (e: FormEvent) => {
 		e.preventDefault();
 		console.log("Register: ", registerData);
+          setRegisterData({ email: "", password: "", confirmPassword: "" });
+          router.refresh();
 	};
 
 	return (
-		<div className="flex items-center justify-center px-4">
-			<div className="w-full max-w-md p-6 border rounded-xl shadow-md bg-white">
+		<div className="min-h-screen w-full flex items-center justify-center px-4 overflow-x-hidden">
+			<div className="w-full max-w-md p-6 border rounded-3xl shadow-md bg-white">
 				<h2 className="text-2xl font-semibold text-center">
 					Welcome back
 				</h2>
@@ -58,25 +66,37 @@ export default function AuthSwitcher() {
 					Please enter your details to sign in
 				</p>
 
-				<div className="flex gap-4 mt-6 mb-10 justify-center">
-					<Button
-						variant="outline"
+				<div className="flex gap-4 mt-6 mb-4 justify-center">
+					<a
+						href="/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className={styles.logo}
 					>
-						<FcGoogle className={styles.logoSize} />
-					</Button>
-					<Button
-						variant="outline"
+						<FcGoogle style={{ width: "20px", height: "20px" }} />
+					</a>
+					<a
+						href="/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className={styles.logo}
 					>
-						<FaApple className={styles.logoSize} />
-					</Button>
-					<Button
-						variant="outline"
+						<FaApple style={{ width: "20px", height: "20px" }} />
+					</a>
+					<a
+						href="/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className={styles.logo}
 					>
-						<FaFacebook className={styles.logoSize} style={{color:"#3B5998"}}/>
-					</Button>
+						<FaFacebook
+							style={{
+								color: "#3B5998",
+								width: "20px",
+								height: "20px",
+							}}
+						/>
+					</a>
 				</div>
 
 				<div className="flex items-center gap-4 w-full my-4">
@@ -92,63 +112,83 @@ export default function AuthSwitcher() {
 					</TabsList>
 
 					<TabsContent value="sign-in">
-						<form onSubmit={handleLogin} className="space-y-4 mt-4">
+						<form onSubmit={handleLogin} className="mt-5 relative">
+							<div className="mb-1 text-xs">Email adress</div>
 							<Input
 								name="email"
 								type="email"
-								placeholder="Email"
+								placeholder="Enter your email"
 								value={loginData.email}
 								onChange={(e) => handleChange(e, setLoginData)}
 								required
 							/>
+							<div className="mb-1 mt-4 text-xs">Password</div>
 							<Input
 								name="password"
-								type="password"
-								placeholder="Password"
+								type={showPassword ? "text" : "password"}
+								placeholder="Enter your password"
 								value={loginData.password}
 								onChange={(e) => handleChange(e, setLoginData)}
 								required
+								className="pr-10"
 							/>
+							<button
+								type="button"
+								onClick={() => setShowPassword((prev) => !prev)}
+								className="absolute right-3 top-1/2 transform -translate-y text-gray-500 hover:text-gray-700"
+								tabIndex={-1}
+							>
+								{showPassword ? <FiEyeOff /> : <FiEye />}
+							</button>
+							<div className="flex justify-between items-center text-xs mt-3 mb-4">
+								<label className="flex items-center space-x-2">
+									<input
+										type="checkbox"
+										className="form-checkbox"
+									/>
+									<span>Remember for 30 days</span>
+								</label>
+								<Link
+									href="/forgot"
+									className="text-blue-600 hover:underline"
+								>
+									Forgot password?
+								</Link>
+							</div>
+
 							<Button type="submit" className="w-full">
 								Sign In
 							</Button>
-							<p className="text-center text-sm">
-								Forgot password?{" "}
-								<Link
-									href="/"
-									className="text-blue-600 underline"
-								>
-									Reset
-								</Link>
-							</p>
 						</form>
 					</TabsContent>
 
 					<TabsContent value="sign-up">
-						<form
-							onSubmit={handleRegister}
-							className="space-y-4 mt-4"
-						>
+						<form onSubmit={handleRegister} className="mt-5">
+							<div className="mb-1 text-xs">Email adress</div>
 							<Input
 								name="email"
 								type="email"
-								placeholder="Email"
+								placeholder="Enter your email"
 								value={registerData.email}
 								onChange={(e) =>
 									handleChange(e, setRegisterData)
 								}
 								required
 							/>
+							<div className="mb-1 mt-4 text-xs">Password</div>
 							<Input
 								name="password"
 								type="password"
-								placeholder="Password"
+								placeholder="Enter your password"
 								value={registerData.password}
 								onChange={(e) =>
 									handleChange(e, setRegisterData)
 								}
 								required
 							/>
+							<div className="mb-1 mt-4 text-xs">
+								Confirm Password
+							</div>
 							<Input
 								name="confirmPassword"
 								type="password"
@@ -159,7 +199,10 @@ export default function AuthSwitcher() {
 								}
 								required
 							/>
-							<Button type="submit" className="w-full">
+							<Button
+								type="submit"
+								className="w-full mt-5 text-base h-11"
+							>
 								Create Account
 							</Button>
 						</form>
